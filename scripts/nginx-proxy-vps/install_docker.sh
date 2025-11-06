@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$BASE_DIR/.env"
+
+# Determine domain
+if [ "$NGINX_DOMAIN_TYPE" = "domain" ]; then
+  TARGET_DOMAIN="$NGINX_DOMAIN"
+else
+  TARGET_DOMAIN="$NGINX_SUB_DOMAIN"
+fi
+
 echo "🐳 Installing Docker and Docker Compose..."
 
 # Remove old packages if exists
@@ -26,6 +36,9 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 
 # Allow user to run docker without sudo
 sudo usermod -aG docker $USER
+
+# Run docker nginx
+docker run -d --name $TARGET_DOMAIN -p 8080:80 nginx:alpine
 
 echo "✅ Docker & Compose installed successfully!"
 docker --version

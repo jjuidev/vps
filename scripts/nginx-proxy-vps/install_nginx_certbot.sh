@@ -57,7 +57,7 @@ if [ "$VPS_ENV" = "vps" ]; then
     server_name $TARGET_DOMAIN;
 
     location / {
-      return 301 https://\$host\$request_uri;
+      return 301 https://\$server_name\$request_uri;
     }
   }
 
