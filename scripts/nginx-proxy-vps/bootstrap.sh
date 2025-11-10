@@ -11,5 +11,7 @@ bash "$BASE_DIR/install_docker.sh"
 bash "$BASE_DIR/install_nginx_certbot.sh"
 bash "$BASE_DIR/setup_firewall.sh"
 bash "$BASE_DIR/install_zsh.sh"
+bash "$BASE_DIR/setup_nodejs.sh"
+bash "$BASE_DIR/add_new_user.sh"
 
 echo "✅ Setup complete!"
