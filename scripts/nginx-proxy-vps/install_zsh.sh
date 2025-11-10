@@ -34,7 +34,7 @@ ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 # Add plugins to ~/.zshrc if not installed
 if ! grep -q "zsh-autosuggestions" ~/.zshrc; then
   echo "🔧 Update ~/.zshrc with new plugins..."
-  sed -i 's/^plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc || true
+  sed -i 's/^plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting yarn pnpm)/' ~/.zshrc || true
 fi
 
 # Set zsh as default shell
@@ -46,15 +46,11 @@ else
   echo "✅ Default shell is already zsh"
 fi
 
-# Load zshrc to apply immediately
+# Load zshrc to apply immediately (chỉ trong subshell, không ảnh hưởng shell hiện tại)
 if [ -f ~/.zshrc ]; then
   echo "🔄 Loading ~/.zshrc..."
-  # Use zsh -c to load config without exiting session
   zsh -ic "source ~/.zshrc; echo '✨ Zsh config reloaded!'" || true
 fi
-
-# Execute zsh to apply immediately
-exec zsh
 
 echo "✅ Setup zsh, Oh My Zsh and plugins completed!"
 zsh --version

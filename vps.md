@@ -203,6 +203,10 @@ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ssh-keygen -t ed25519 -C "your_email@example.com" -f ~/.ssh/id_ed25519
 # Trong đó, chuẩn ed25519 là mặc định và tốt hơn về mặt bảo mật so với rsa, khuyến khích sử dụng.
 
+# Xoá toàn bộ key ở VPS trong file .ssh/known_hosts để reset/config ssh key mới cho VPS
+ssh-keygen -R <your_host_ip>
+# Ví dụ: ssh-keygen -R 123.456.789.012
+
 # Copy file public key sang VPS
 ssh-copy-id -i ~/.ssh/id_ed25519.pub root@123.456.789.012
 # Ví dụ: gõ lệnh này ở máy local và nhập password của user trên VPS
